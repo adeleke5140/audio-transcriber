@@ -1,0 +1,18 @@
+{
+  "name": "record-transcribe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "adeleke5140",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "dotenv": "^16.0.3",
+    "fluent-ffmpeg": "^2.1.2",
+    "mic": "^2.1.2",
+    "openai": "^3.2.1"
+  }
+}
