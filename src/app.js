@@ -10,7 +10,8 @@ async function main() {
   const audioFileName = "recorded_audio.wav";
   await record(audioFileName);
   const transcript = await transcribe(audioFileName);
-  console.log("Transcription", transcript);
+
+  console.log("Transcription:\n", transcript);
 }
 
 main();
