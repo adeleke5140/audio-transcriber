@@ -16,7 +16,7 @@ function recordAudio(fileName) {
     const output = fs.createWriteStream(fileName);
     const writable = new Readable().wrap(micInputStream);
 
-    console.log("Recording...🎙️ Press Ctrl+C to stop");
+    console.log("Recording...🎙️\n Press Ctrl+C to stop");
 
     writable.pipe(output);
 
@@ -25,6 +25,7 @@ function recordAudio(fileName) {
     process.on("SIGINT", () => {
       micInstance.stop();
       console.log("Finished recording 🚀");
+      console.log("Transcribing...📝");
       resolve();
     });
 
