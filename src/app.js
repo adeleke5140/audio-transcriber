@@ -2,10 +2,10 @@ import ffmpeg from "fluent-ffmpeg";
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import { recordAudio } from "./record.js";
 import { transcribeAudio } from "./transcribe.js";
-
 import * as dotenv from "dotenv";
 import { createSpinner } from "nanospinner";
 import chalkAnimation from "chalk-animation";
+
 dotenv.config();
 
 ffmpeg.setFfmpegPath(ffmpegPath);
@@ -24,16 +24,17 @@ async function welcome() {
 async function main() {
   const audioFileName = "recorded_audio.wav";
   await recordAudio(audioFileName);
-  const spinner = createSpinner("Transcribing").start();
+  const spinner = createSpinner("Transcribing...").start();
   const transcript = await transcribeAudio(audioFileName);
   if (transcript) {
     spinner.success({ text: "Transcription complete:" });
     console.log(transcript);
   } else {
-    spinner.error("Could not transcribe file ❌");
+    spinner.error({ text: "Could not transcribe file ❌" });
     process.exit(1);
   }
 }
 
+await banner();
 await welcome();
 await main();
