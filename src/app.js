@@ -1,17 +1,39 @@
-const ffmpeg = require("fluent-ffmpeg");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg");
-const record = require("./record");
-const transcribe = require("./transcribe");
-require("dotenv").config();
+import ffmpeg from "fluent-ffmpeg";
+import ffmpegPath from "@ffmpeg-installer/ffmpeg";
+import { recordAudio } from "./record.js";
+import { transcribeAudio } from "./transcribe.js";
+
+import * as dotenv from "dotenv";
+import { createSpinner } from "nanospinner";
+import chalkAnimation from "chalk-animation";
+dotenv.config();
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-async function main() {
-  const audioFileName = "recorded_audio.wav";
-  await record(audioFileName);
-  const transcript = await transcribe(audioFileName);
+const sleep = async (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
-  console.log("Transcription:\n", transcript);
+async function welcome() {
+  const intro = chalkAnimation.rainbow(
+    "Welcome to TransAI. Record your voice and let AI transcribe it for you. \n"
+  );
+
+  await sleep();
+  intro.stop();
 }
 
-main();
+async function main() {
+  const audioFileName = "recorded_audio.wav";
+  await recordAudio(audioFileName);
+  const spinner = createSpinner("Transcribing").start();
+  const transcript = await transcribeAudio(audioFileName);
+  if (transcript) {
+    spinner.success({ text: "Transcription complete:" });
+    console.log(transcript);
+  } else {
+    spinner.error("Could not transcribe file ❌");
+    process.exit(1);
+  }
+}
+
+await welcome();
+await main();

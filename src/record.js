@@ -1,10 +1,12 @@
-const mic = require("mic");
-const fs = require("fs");
-const { Readable } = require("stream");
+import mic from "mic";
+import fs from "fs";
+import { Readable } from "stream";
+import chalkAnimation from "chalk-animation";
+import chalk from "chalk";
 
 //what does sample rate of 16000Hz mean and what does the audio channel
 //mono mean
-function recordAudio(fileName) {
+const recordAudio = async (fileName) => {
   return new Promise((resolve, reject) => {
     const micInstance = mic({
       rate: "16000",
@@ -16,7 +18,7 @@ function recordAudio(fileName) {
     const output = fs.createWriteStream(fileName);
     const writable = new Readable().wrap(micInputStream);
 
-    console.log("Recording...🎙️\n Press Ctrl+C to stop");
+    console.log(chalk.bgMagenta("Recording...🎙️\n Press Ctrl+C to stop"));
 
     writable.pipe(output);
 
@@ -24,8 +26,7 @@ function recordAudio(fileName) {
 
     process.on("SIGINT", () => {
       micInstance.stop();
-      console.log("Finished recording 🚀");
-      console.log("Transcribing...📝");
+      console.log(chalk.bgBlue("\n Finished recording 🚀"));
       resolve();
     });
 
@@ -33,6 +34,6 @@ function recordAudio(fileName) {
       reject(err);
     });
   });
-}
+};
 
-module.exports = recordAudio;
+export { recordAudio };
