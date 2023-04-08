@@ -1,6 +1,7 @@
-const { Configuration, OpenAIApi } = require("openai");
-const fs = require("fs");
-require("dotenv").config();
+import { Configuration, OpenAIApi } from "openai";
+import fs from "fs";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const apiKey = process.env.OPENAI_API_KEY;
 
@@ -11,12 +12,12 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-async function transcribeAudio(fileName) {
+const transcribeAudio = async (fileName) => {
   const transcript = await openai.createTranscription(
     fs.createReadStream(fileName),
     "whisper-1"
   );
   return transcript.data.text;
-}
+};
 
-module.exports = transcribeAudio;
+export { transcribeAudio };

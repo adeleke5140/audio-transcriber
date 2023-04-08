@@ -2,17 +2,20 @@
   "name": "record-transcribe",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "scripts": {
-  },
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {},
   "keywords": [],
   "author": "adeleke5140",
   "license": "ISC",
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "chalk": "^5.2.0",
+    "chalk-animation": "^2.0.3",
     "dotenv": "^16.0.3",
     "fluent-ffmpeg": "^2.1.2",
     "mic": "^2.1.2",
+    "nanospinner": "^1.1.0",
     "openai": "^3.2.1"
   }
 }
