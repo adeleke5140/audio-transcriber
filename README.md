@@ -13,7 +13,7 @@ A command line tool that records your voice and transcribes the audio with OpenA
 
 2. Get your OpenAI API key and add it to a `.env` file
 
-3. The relevant `env` variable is `OPEN_API_KEY`
+3. The relevant `env` variable is `OPENAI_API_KEY`
 
 4. Run
 
