@@ -1,13 +1,9 @@
 # audio-transcriber
 
-Transcribe audio with OpenAI whisper model
+A command line tool that records your voice and transcribes the audio with OpenAI whisper model.
 
-## Why
 
-Interacting with APIs would help me improve my proficiency with NodeJS. I aim to extend that
-by building out a Next frontend and communicating with that.
-
-#How to use
+## How to use
 1. Clone the repo and install the packages
 
 ```
@@ -17,7 +13,9 @@ by building out a Next frontend and communicating with that.
 
 2. Get your OpenAI API key and add it to a `.env` file
 
-3. Run
+3. The relevant `env` variable is `OPEN_API_KEY`
+
+4. Run
 
 ```
   node src/app.js
