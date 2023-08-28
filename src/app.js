@@ -35,6 +35,5 @@ async function main() {
   }
 }
 
-await banner();
 await welcome();
 await main();

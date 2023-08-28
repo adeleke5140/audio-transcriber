@@ -13,10 +13,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const transcribeAudio = async (fileName) => {
-  const transcript = await openai.createTranscription(
+  //imporve error handling
+  let transcript = await openai.createTranscription(
     fs.createReadStream(fileName),
     "whisper-1"
   );
+
   return transcript.data.text;
 };
 
